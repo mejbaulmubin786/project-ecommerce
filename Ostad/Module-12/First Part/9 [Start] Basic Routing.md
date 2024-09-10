@@ -198,3 +198,21 @@ Route::get('/restricted', [RestrictedController::class, 'index'])->middleware('c
 -   **Route Middleware** নির্দিষ্ট রাউট বা রাউট গ্রুপের জন্য কাস্টম middleware সংযুক্ত করা যায়।
 
 Laravel এর `Kernel.php` ফাইলটি `web.php` এবং `api.php` ফাইলের রাউটগুলোর জন্য প্রয়োজনীয় middleware এবং রিকোয়েস্ট হ্যান্ডলিংয়ের নিয়ম ঠিক করে, যা অ্যাপ্লিকেশনকে আরও সুরক্ষিত এবং কার্যকরী করে তুলতে সাহায্য করে।
+
+---
+
+```php
+Route::get('/hello', function () {
+    return "Hellow Laravel";
+});
+
+http://127.0.0.1:8000/hello
+
+
+Route::get('/hello', function () {
+    return "Hellow Laravel from API";
+});
+
+http://127.0.0.1:8000/api/hello
+
+```
