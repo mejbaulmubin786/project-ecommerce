@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ParaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::put('/hello', function () {
     return "Hellow Laravel from API";
 });
+
+Route::get('/hello/{name}/{age}', [ParaController::class, 'ParaAction']);
