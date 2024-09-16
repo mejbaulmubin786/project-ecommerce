@@ -66,3 +66,97 @@
 -   **DoS এবং DDoS আক্রমণ প্রতিরোধে** Throttling অন্যতম একটি কার্যকরী উপায়।
 
 এই আলোচনা থেকে আশা করছি, তুমি **HTTP Request Throttling** এর মৌলিক ধারণা ভালোভাবে বুঝতে পেরেছ।
+
+**Laravel** এ **HTTP Request Throttling** বা **Rate Limiting** Middleware দিয়ে সহজেই করা যায়। Laravel framework এ এটি একটি গুরুত্বপূর্ণ ফিচার যা অ্যাপ্লিকেশনকে অনিরাপদ বা অতিরিক্ত লোড থেকে রক্ষা করতে ব্যবহৃত হয়।
+
+### Laravel এ Throttling Middleware:
+
+Laravel এ **throttling** মূলত **ThrottleRequests** Middleware এর মাধ্যমে সম্পন্ন হয়। এটি প্রতিটি HTTP request-এর উপর নির্দিষ্ট সীমা আরোপ করে দেয়।
+
+এটি সাধারণত **Route** বা **Controller**-এ প্রয়োগ করা হয়, যাতে নির্দিষ্ট সময়ে একজন ব্যবহারকারী কতবার request পাঠাতে পারবেন তা সীমিত রাখা যায়।
+
+### উদাহরণ - লগইন রিকোয়েস্ট Throttling:
+
+ধরো, তোমার একটি লগইন সিস্টেম আছে এবং তুমি চাও যে একজন ব্যবহারকারী প্রতি মিনিটে সর্বোচ্চ ৫ বার লগইন চেষ্টা করতে পারবে। এই কাজটি Laravel-এর Throttle Middleware দিয়ে করা সম্ভব।
+
+# Laravel এ Throttling Middleware কিভাবে কাজ করে:
+
+1. **Middleware রেজিস্টার করা:**
+   Laravel এ **app/Http/Kernel.php** ফাইলে একটি default Middleware হিসেবে **ThrottleRequests** Middleware রেজিস্টার করা থাকে:
+
+    ```php
+    protected $routeMiddleware = [
+        // অন্যান্য Middleware
+        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+    ];
+    ```
+
+2. **Route-এ Throttling প্রয়োগ:**
+
+    এবার, তুমি তোমার রুট বা রাউটিং ফাইলে **throttle** Middleware ব্যবহার করে রিকোয়েস্ট থ্রটল করতে পারো। যেমন:
+
+    ```php
+    Route::post('/login', 'Auth\LoginController@login')->middleware('throttle:5,1');
+    ```
+
+    এখানে `5,1` এর অর্থ:
+
+    - একজন ব্যবহারকারী ১ মিনিটে সর্বোচ্চ ৫ বার এই `/login` রুটে রিকোয়েস্ট পাঠাতে পারবেন।
+
+    যদি ১ মিনিটের মধ্যে ৫ বার এর বেশি রিকোয়েস্ট পাঠানো হয়, তখন ব্যবহারকারীকে 429 (Too Many Requests) HTTP status code রেসপন্স হিসেবে দেওয়া হবে।
+
+### উদাহরণ অনুযায়ী কিভাবে কাজ করবে:
+
+-   একজন ইউজার যদি **৫ বার** সঠিক বা ভুল password দিয়ে **/login** রুটে রিকোয়েস্ট পাঠান, তাহলে ৫ বার চেষ্টার পরে সে ৬ষ্ঠ বার চেষ্টা করতে পারবেন না। Laravel **429 Too Many Requests** error ফিরিয়ে দেবে এবং ইউজারকে কিছুক্ষণ অপেক্ষা করতে বলবে।
+
+    -   এই থ্রটলিং সিস্টেমটি সাধারণত brute force আক্রমণ থেকে রক্ষা পেতে গুরুত্বপূর্ণ।
+
+### Customizing Throttle Message (কাস্টম মেসেজ):
+
+Laravel এ default message-টি পরিবর্তন করা যায়। Controller-এ exception handling-এর মাধ্যমে কাস্টম মেসেজ দেওয়া সম্ভব:
+
+```php
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
+
+public function login(Request $request)
+{
+    try {
+        // তোমার লগইন লজিক
+    } catch (ThrottleRequestsException $e) {
+        return response()->json(['message' => 'অনেকবার চেষ্টা হয়েছে, একটু পরে আবার চেষ্টা করুন।'], 429);
+    }
+}
+```
+
+### Global Middleware হিসেবেও ব্যবহার:
+
+তুমি চাইলে নির্দিষ্ট route এর জন্যই শুধু নয়, পুরো application-এ request throttling ব্যবহার করতে পারো। এক্ষেত্রে **Kernel.php** ফাইলে **global middleware** হিসেবে throttle middleware যোগ করতে হবে।
+
+### Advanced Customization:
+
+Laravel এর throttling কাস্টমাইজ করতে `RateLimiter` ক্লাস ব্যবহার করা যায়। এটি দিয়ে তুমি আরও সুনির্দিষ্টভাবে রেট লিমিট করতে পারো। যেমন IP address, user ID ইত্যাদির উপর ভিত্তি করে থ্রটল নির্ধারণ করা যায়।
+
+```php
+use Illuminate\Support\Facades\RateLimiter;
+
+RateLimiter::for('login', function (Request $request) {
+    return Limit::perMinute(5)->by($request->ip());
+});
+```
+
+এখানে প্রতিটি ইউজারের IP অ্যাড্রেস অনুসারে প্রতি মিনিটে সর্বোচ্চ ৫টি রিকোয়েস্ট করার অনুমতি দেওয়া হয়েছে।
+
+### Throttling Middleware কেন প্রয়োজন?
+
+1. **Brute Force আক্রমণ থেকে রক্ষা:**
+    - কেউ বারবার পাসওয়ার্ড বা লগইন চেষ্টা করলে তা সার্ভারের জন্য ক্ষতিকর হতে পারে। Throttling এই আক্রমণ থেকে রক্ষা করে।
+2. **API-এর ওপর চাপ কমানো:**
+
+    - API endpoint এ অতিরিক্ত রিকোয়েস্ট আসলে সার্ভারের লোড বেড়ে যায়। Throttling করে অতিরিক্ত রিকোয়েস্ট সীমাবদ্ধ করে সার্ভারের পারফরম্যান্স বাড়ানো যায়।
+
+3. **ডাটা মিসইউজ প্রতিরোধ:**
+    - কিছু ইউজার ইচ্ছাকৃতভাবে অনেকবার সার্ভারে রিকোয়েস্ট পাঠিয়ে ডাটা সংগ্রহের চেষ্টা করে (Data scraping)। Throttling এর মাধ্যমে তাদের এই কাজটি করতে বাধা দেওয়া যায়।
+
+### Conclusion:
+
+**Laravel Throttling Middleware** একটি গুরুত্বপূর্ণ ফিচার যা সার্ভারের সুরক্ষা, কর্মক্ষমতা ও ব্যবহারকারীর অভিজ্ঞতা উন্নত করতে সহায়তা করে। এটি ব্যবহার করে নির্দিষ্ট সময়ের মধ্যে রিকোয়েস্টের সংখ্যা সীমিত করে সার্ভারকে অতিরিক্ত চাপ ও আক্রমণ থেকে রক্ষা করা যায়।
