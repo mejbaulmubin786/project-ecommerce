@@ -1,6 +1,5 @@
 HTTP request-এর বিভিন্ন segment নিয়ে বিশদ আলোচনা করছি:
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
