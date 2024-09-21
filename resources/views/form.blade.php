@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Form Submission</title>
-    </head>
-    <body>
-        @if (session('success'))
-            <p>{{ session('success') }}</p>
-        @endif
+<head>
+    <title>Submit Form</title>
+</head>
+<body>
+    <h1>Submit your information</h1>
 
-        <form action="{{ route('form.submit') }}" method="POST">
-            @csrf
-            <label for="name">Enter your name:</label>
-            <input type="text" name="name" id="name" />
-            <button type="submit">Submit</button>
-        </form>
-    </body>
+    <form action="/submit-form" method="POST">
+        @csrf
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
 </html>
