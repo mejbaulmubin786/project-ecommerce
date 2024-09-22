@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\PracticeParameterController;
 use App\Http\Controllers\PramController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -26,3 +27,7 @@ Route::post('/form', function () {
 });
 
 Route::match(['get', 'post'], '/submit-form', [UserController::class, 'submit']);
+
+Route::get('/countrylist/{country}', [PracticeParameterController::class, 'practiceparamitar']);
+
+Route::match(['get', 'post'], '/pra-form', [FormController::class, 'submit']);
