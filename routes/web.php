@@ -15,7 +15,7 @@ Route::get('/', function () {
 
 Route::get('/con', [DemoController::class, 'DemoAction']);
 
-Route::get('/about/{name}/{age}', [PramController::class, 'PramAction']);
+Route::get('/about', [PramController::class, 'PramAction']);
 
 Route::get('/form', [FormController::class, 'showForm'])->name('form.show');
 
