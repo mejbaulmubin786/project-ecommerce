@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\CollectAllDta;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\PracticeParameterController;
@@ -33,4 +32,4 @@ Route::get('/countrylist/{country}', [PracticeParameterController::class, 'pract
 
 Route::match(['get', 'post'], '/pra-form', [FormController::class, 'submit']);
 
-Route::get('/information/{name}/{age}', [CollectAllDta::class, 'action']);
+Route::get('/hello/{name}/{age}', [DemoController::class, 'DemoAction']);
