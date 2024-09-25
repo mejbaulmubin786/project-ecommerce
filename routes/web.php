@@ -32,4 +32,4 @@ Route::get('/countrylist/{country}', [PracticeParameterController::class, 'pract
 
 Route::match(['get', 'post'], '/pra-form', [FormController::class, 'submit']);
 
-Route::get('/hello/{name}/{age}', [DemoController::class, 'DemoAction']);
+Route::get('/hello', [DemoController::class, 'DemoAction']);
