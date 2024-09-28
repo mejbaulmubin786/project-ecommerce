@@ -4,6 +4,7 @@ use App\Http\Controllers\DemoController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\PracticeParameterController;
 use App\Http\Controllers\PramController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,3 +34,7 @@ Route::get('/countrylist/{country}', [PracticeParameterController::class, 'pract
 Route::match(['get', 'post'], '/pra-form', [FormController::class, 'submit']);
 
 Route::get('/hello', [DemoController::class, 'DemoAction']);
+
+Route::post("/demo1", [ProductController::class, 'Demo1']);
+Route::get("/demo2", [ProductController::class, 'Demo2']);
+Route::get("/demo3", [ProductController::class, 'Demo3']);
