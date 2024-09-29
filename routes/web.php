@@ -6,6 +6,7 @@ use App\Http\Controllers\GreetingsController;
 use App\Http\Controllers\PracticeParameterController;
 use App\Http\Controllers\PramController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -75,3 +76,7 @@ Route::get('/client-ip', function (Request $request) {
 });
 
 Route::get('/DemoAction/{num1}/{num2}', [DemoController::class, 'DemoAction']);
+
+Route::get('/users', [ProfileController::class, 'index'])->name('user.list');
+Route::get('/profile/{id}/{name}/{age}', [ProfileController::class, 'show'])->name('user.profile');
+Route::get('/profile', [ProfileController::class, 'show'])->name('user.search');

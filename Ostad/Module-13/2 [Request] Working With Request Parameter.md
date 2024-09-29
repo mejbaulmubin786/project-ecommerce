@@ -784,4 +784,109 @@ Query String রিকোয়েস্টটি কন্ট্রোলার �
 
 2. **Query String**: দ্বিতীয় উদাহরণে একটি ফর্ম ব্যবহার করে ইউজার `id`, `name`, এবং `age` ইনপুট দিয়ে Query String (`/profile?id=101&name=John&age=25`) হিসেবে ডাটা পাঠিয়েছে এবং সেই ডাটার ভিত্তিতে সার্চের রেজাল্ট দেখানো হয়েছে।
 
-এই দুটি উদাহরণ বাস্তব ক্ষেত্রে Laravel এ URL এবং Query String ডাটা পাঠানোর সুন্দর উপায়।
+## এই দুটি উদাহরণ বাস্তব ক্ষেত্রে Laravel এ URL এবং Query String ডাটা পাঠানোর সুন্দর উপায়।
+
+নিশ্চয়ই, নিচে আমি `user_list.blade.php` এবং `search_user.blade.php` এর জন্য প্রয়োজনীয় রাউটগুলো উল্লেখ করছি।
+
+### ১. **`user_list.blade.php` এর জন্য Route:**
+
+এখানে আমরা ইউজার লিস্ট দেখানোর জন্য একটি রুট তৈরি করব এবং ইউজারের প্রোফাইলে ডাইনামিক URL এর মাধ্যমে যাওয়ার জন্য রুট তৈরি করব।
+
+```php
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+
+// Route for displaying user list
+Route::get('/users', [ProfileController::class, 'index'])->name('user.list');
+
+// Route for displaying specific user profile with dynamic URL
+Route::get('/profile/{id}/{name}/{age}', [ProfileController::class, 'show'])->name('user.profile');
+```
+
+#### Route Details:
+
+-   `/users`: ইউজারের লিস্ট দেখানোর জন্য রুট। `ProfileController` এর `index()` মেথড ব্যবহার করে এই লিস্ট দেখাবে।
+-   `/profile/{id}/{name}/{age}`: প্রতিটি ইউজারের প্রোফাইলে যাওয়ার জন্য ডাইনামিক URL প্যারামিটার সহ একটি রুট। এটি `ProfileController` এর `show()` মেথড ব্যবহার করে ইউজারের প্রোফাইল তথ্য দেখাবে।
+
+---
+
+### ২. **`search_user.blade.php` এর জন্য Route:**
+
+এখানে একটি সার্চ ফর্ম থাকবে যেটি Query String এর মাধ্যমে ইউজারের তথ্য পাবে।
+
+```php
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+
+// Route for searching user via query string
+Route::get('/profile', [ProfileController::class, 'show'])->name('user.search');
+```
+
+#### Route Details:
+
+-   `/profile`: Query String (`?id=101&name=John&age=25`) এর মাধ্যমে ইউজারের প্রোফাইল সার্চ করা যাবে। এটি `ProfileController` এর `show()` মেথড ব্যবহার করে Query String থেকে ডাটা রিসিভ করে সেই অনুযায়ী রেজাল্ট দেখাবে।
+
+---
+
+### রাউটারের সম্পূর্ণ কোড:
+
+```php
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+
+// Route for displaying user list with dynamic URLs
+Route::get('/users', [ProfileController::class, 'index'])->name('user.list');
+
+// Route for viewing a specific user profile with dynamic parameters
+Route::get('/profile/{id}/{name}/{age}', [ProfileController::class, 'show'])->name('user.profile');
+
+// Route for searching user with query string
+Route::get('/profile', [ProfileController::class, 'show'])->name('user.search');
+```
+
+### Controller Methods (Recap):
+
+#### `index()` মেথড:
+
+```php
+public function index()
+{
+    $users = [
+        (object) ['id' => 101, 'name' => 'John Doe', 'age' => 25],
+        (object) ['id' => 102, 'name' => 'Jane Smith', 'age' => 30],
+        (object) ['id' => 103, 'name' => 'Peter Parker', 'age' => 22],
+    ];
+
+    return view('user_list', ['users' => $users]);
+}
+```
+
+#### `show()` মেথড:
+
+```php
+use Illuminate\Http\Request;
+
+public function show(Request $request, $id = null, $name = null, $age = null)
+{
+    // If query string is used, the values will be taken from Request
+    $id = $id ?? $request->query('id');
+    $name = $name ?? $request->query('name');
+    $age = $age ?? $request->query('age');
+
+    // If the request is using query string (search form)
+    if ($request->isMethod('get') && $request->has(['id', 'name', 'age'])) {
+        return view('search_user', compact('id', 'name', 'age'));
+    }
+
+    // If the request is using dynamic URL
+    return "User ID: $id, Name: $name, Age: $age";
+}
+```
+
+---
+
+### উপসংহার:
+
+-   `/users`: ইউজারের লিস্ট দেখাবে এবং প্রতিটি ইউজারের প্রোফাইলে যাওয়ার জন্য ডাইনামিক URL থাকবে।
+-   `/profile/{id}/{name}/{age}`: ডাইনামিক URL এর মাধ্যমে ইউজারের প্রোফাইল দেখানো হবে।
+-   `/profile`: Query String ব্যবহার করে ইউজারের তথ্য সার্চ করার জন্য ব্যবহার হবে।
