@@ -80,3 +80,8 @@ Route::get('/DemoAction/{num1}/{num2}', [DemoController::class, 'DemoAction']);
 Route::get('/users', [ProfileController::class, 'index'])->name('user.list');
 Route::get('/profile/{id}/{name}/{age}', [ProfileController::class, 'show'])->name('user.profile');
 Route::get('/profile', [ProfileController::class, 'show'])->name('user.search');
+
+Route::get('/StoringData/{email}', [DemoController::class, 'StoringData']);
+Route::get('/RetrievingData', [DemoController::class, 'RetrievingData']);
+Route::get('/DeletingData', [DemoController::class, 'DeletingData']);
+Route::get('/FlashData', [DemoController::class, 'FlashData']);
