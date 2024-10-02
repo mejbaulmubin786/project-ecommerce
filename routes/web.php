@@ -85,3 +85,37 @@ Route::get('/StoringData/{email}', [DemoController::class, 'StoringData']);
 Route::get('/RetrievingData', [DemoController::class, 'RetrievingData']);
 Route::get('/DeletingData', [DemoController::class, 'DeletingData']);
 Route::get('/FlashData', [DemoController::class, 'FlashData']);
+
+Route::get('/post/{id?}/commet/{commetnid?}', function (string $id = null, string $comment = null) {
+    if ($id) {
+        return "<h1>Post ID: " . $id . "</h1><h2>Post ID: " . $comment . "</h2>";
+    } else {
+        return "No data found";
+    }
+});
+
+Route::get('/search', function () {
+    return "Mejbaul Mubin";
+});
+
+Route::get('/country/{countryname}', [DemoController::class, 'DemoAction']);
+
+Route::get('/hellow/{name?}/{age?}', [DemoController::class, 'DemoActionOp']);
+
+Route::get('/products/{category}/{id}', function ($category, $id) {
+    // প্রথম segment 'products'
+    $segmentOne = request()->segment(1); // 'products'
+    // দ্বিতীয় segment হল ক্যাটাগরি
+    $segmentTwo = request()->segment(2); // $category
+    // তৃতীয় segment হল পণ্য ID
+    $segmentThree = request()->segment(3); // $id
+
+    // এখানে লজিক যুক্ত করা হচ্ছে
+    if ($segmentOne === 'products') {
+        return "{$segmentOne} আপনি $segmentTwo ক্যাটাগরির পণ্যটি দেখতে চান, যার ID হল $segmentThree";
+    } else {
+        return "দুঃখিত, অনুগ্রহ করে সঠিক URL ব্যবহার করুন।";
+    }
+});
+
+Route::post('/bodypractice', [DemoController::class, 'BodyPractice']);

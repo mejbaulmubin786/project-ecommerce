@@ -1,34 +1,39 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 
 class DemoController extends Controller {
-    // সেশনে ডাটা সংরক্ষণ করা
-    public function StoringData(Request $request, $email): bool {
-        // সেশনে 'user_email' কীগুলোর মাধ্যমে ডাটা সংরক্ষণ করা হচ্ছে
-        $request->session()->put('user_email', $email);
-        return true;
+    function DemoAction(Request $request) {
+        $name = $request->route('countryname');
+        return "$name";
+
     }
 
-    // সেশন থেকে ডাটা রিট্রিভ করা
-    public function RetrievingData(Request $request): string {
-        // 'user_email' থেকে ডাটা রিট্রিভ করা হচ্ছে, যদি না থাকে 'default' রিটার্ন করবে
-        return $request->session()->get('user_email', 'default');
+    function DemoActionOp(Request $request) {
+        $name = $request->name ?? 'Unknown';
+        $age = $request->age;
+
+        return "My name is {$name} and my age is {$age}";
+
     }
 
-    // সেশন থেকে ডাটা মুছে ফেলা
-    public function DeletingData(Request $request): bool {
-        // 'user_email' ডাটা সেশন থেকে মুছে ফেলা হচ্ছে
-        $request->session()->forget('user_email');
-        return true;
-    }
+    function BodyPractice(Request $request) {
+        $name = $request->input('name');
+        $age = $request->input('age');
+        $city = $request->input('address.city');
+        $postcode = $request->input('address.postcode');
 
-    // ফ্ল্যাশ ডাটা সংরক্ষণ করা এবং মুছে ফেলা
-    public function FlashData(Request $request): bool {
-        // সেশন থেকে সব ডাটা মুছে ফেলা হচ্ছে
-        $request->session()->flush();
-        return true;
     }
 }
+
+/*
+
+class DemoController extends Controller {
+function DemoAction($name) {
+
+return "$name";
+
+}
+}
+ */
