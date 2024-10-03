@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DemoController;
+use App\Http\Middleware\CheckRequestDetails;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/hello1/{key}', [DemoController::class, 'DemoAction1'])->middleware([CheckRequestDetails::class]);
@@ -9,11 +10,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/hello4/{key}', [DemoController::class, 'DemoAction4'])->middleware([CheckRequestDetails::class]);
 // Route::get('/hello5/{key}', [DemoController::class, 'DemoAction5'])->middleware([CheckRequestDetails::class]);
 
-Route::get('/hello1/{key}', [DemoController::class, 'DemoAction1']);
-Route::get('/hello2/{key}', [DemoController::class, 'DemoAction2']);
-Route::get('/hello3/{key}', [DemoController::class, 'DemoAction3']);
-Route::get('/hello4/{key}', [DemoController::class, 'DemoAction4']);
-Route::get('/hello5/{key}', [DemoController::class, 'DemoAction5']);
+Route::get('/hello', [DemoController::class, 'DemoAction'])->middleware([CheckRequestDetails::class]);
 
 // ফর্ম দেখানোর Route (GET)
 

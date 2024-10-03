@@ -1,33 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 
 class DemoController extends Controller {
 
-    function DemoAction1() {
+    function DemoAction(Request $request): array {
 
-        return "Hello1";
+        return $request->header();
 
-    }
-
-    function DemoAction2() {
-
-        return "Hello2";
-    }
-
-    function DemoAction3() {
-
-        return "Hello3";
-    }
-
-    function DemoAction4() {
-
-        return "Hello4";
-    }
-
-    function DemoAction5() {
-
-        return "Hello5";
     }
 
 }

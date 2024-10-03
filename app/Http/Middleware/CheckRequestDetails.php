@@ -8,12 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 class CheckRequestDetails {
 
     public function handle(Request $request, Closure $next): Response {
-        $key = $request->key;
+        $request->headers->add(['email' => 'uopeople@uopeople.com']);
+        return $next($request);
 
-        if ($key == "123") {
-            return $next($request);
-        } else {
-            return response()->json("unauthorized", 401);
-        }
     }
 }
