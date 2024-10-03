@@ -1,25 +1,19 @@
 <?php
 
 use App\Http\Controllers\DemoController;
-use App\Http\Controllers\FormController;
-use App\Http\Controllers\GreetingsController;
-use App\Http\Controllers\PracticeParameterController;
-use App\Http\Controllers\PramController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckRequestDetails;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/hello1', [DemoController::class, 'DemoAction'])->middleware([CheckRequestDetails::class]);
+Route::get('/hello1/{key}', [DemoController::class, 'DemoAction1'])->middleware([CheckRequestDetails::class]);
+
+Route::get('/hello2', [DemoController::class, 'DemoAction2']);
 
 // ফর্ম দেখানোর Route (GET)
 
 Route::get('/', function () {
     return view('welcome');
 });
-
+/*
 Route::get('/con', [DemoController::class, 'DemoAction']);
 
 Route::get('/about', [PramController::class, 'PramAction']);
@@ -30,7 +24,7 @@ Route::get('/form', [FormController::class, 'showForm'])->name('form.show');
 Route::post('/form', [FormController::class, 'handleSubmit'])->name('form.submit');
 
 Route::post('/form', function () {
-    return view('form');
+return view('form');
 });
 
 Route::match(['get', 'post'], '/submit-form', [UserController::class, 'submit']);
@@ -49,32 +43,32 @@ Route::get('/test', [GreetingsController::class, 'sayHi']);
 
 Route::post('/form-submit', function (Request $request) {
 
-    $email = $request->input('email');
+$email = $request->input('email');
 
-    if ($email) {
+if ($email) {
 
-        return response()->json([
-            "status" => "success",
-            "message" => "Form submitted successfully.",
-            "email" => $email,
-        ]);
+return response()->json([
+"status" => "success",
+"message" => "Form submitted successfully.",
+"email" => $email,
+]);
 
-    } else {
+} else {
 
-        return response()->json([
-            "status" => "failed",
-            "message" => "Form submission failed.",
-        ]);
+return response()->json([
+"status" => "failed",
+"message" => "Form submission failed.",
+]);
 
-    }
+}
 
 });
 
 Route::get('/client-ip', function (Request $request) {
 
-    $clientIp = $request->ip();
+$clientIp = $request->ip();
 
-    return $clientIp;
+return $clientIp;
 
 });
 
@@ -90,15 +84,15 @@ Route::get('/DeletingData', [DemoController::class, 'DeletingData']);
 Route::get('/FlashData', [DemoController::class, 'FlashData']);
 
 Route::get('/post/{id?}/commet/{commetnid?}', function (string $id = null, string $comment = null) {
-    if ($id) {
-        return "<h1>Post ID: " . $id . "</h1><h2>Post ID: " . $comment . "</h2>";
-    } else {
-        return "No data found";
-    }
+if ($id) {
+return "<h1>Post ID: " . $id . "</h1><h2>Post ID: " . $comment . "</h2>";
+} else {
+return "No data found";
+}
 });
 
 Route::get('/search', function () {
-    return "Mejbaul Mubin";
+return "Mejbaul Mubin";
 });
 
 Route::get('/country/{countryname}', [DemoController::class, 'DemoAction']);
@@ -106,19 +100,20 @@ Route::get('/country/{countryname}', [DemoController::class, 'DemoAction']);
 Route::get('/hellow/{name?}/{age?}', [DemoController::class, 'DemoActionOp']);
 
 Route::get('/products/{category}/{id}', function ($category, $id) {
-    // প্রথম segment 'products'
-    $segmentOne = request()->segment(1); // 'products'
-    // দ্বিতীয় segment হল ক্যাটাগরি
-    $segmentTwo = request()->segment(2); // $category
-    // তৃতীয় segment হল পণ্য ID
-    $segmentThree = request()->segment(3); // $id
+// প্রথম segment 'products'
+$segmentOne = request()->segment(1); // 'products'
+// দ্বিতীয় segment হল ক্যাটাগরি
+$segmentTwo = request()->segment(2); // $category
+// তৃতীয় segment হল পণ্য ID
+$segmentThree = request()->segment(3); // $id
 
-    // এখানে লজিক যুক্ত করা হচ্ছে
-    if ($segmentOne === 'products') {
-        return "{$segmentOne} আপনি $segmentTwo ক্যাটাগরির পণ্যটি দেখতে চান, যার ID হল $segmentThree";
-    } else {
-        return "দুঃখিত, অনুগ্রহ করে সঠিক URL ব্যবহার করুন।";
-    }
+// এখানে লজিক যুক্ত করা হচ্ছে
+if ($segmentOne === 'products') {
+return "{$segmentOne} আপনি $segmentTwo ক্যাটাগরির পণ্যটি দেখতে চান, যার ID হল $segmentThree";
+} else {
+return "দুঃখিত, অনুগ্রহ করে সঠিক URL ব্যবহার করুন।";
+}
 });
 
 Route::post('/bodypractice', [DemoController::class, 'BodyPractice']);
+ */
