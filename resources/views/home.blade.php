@@ -1,11 +1,11 @@
 
 <ul>
-@for($i=0; $i<100; $i=$i+1)
+@foreach($users as $user)
 
-        <li>{{ $i }}</li>
-
-
+        <li> User name is={{ $user['name'] }} and city is = {{ $user['city'] }}</li>
 
 
-@endfor()
+
+
+@endforeach()
 </ul>
