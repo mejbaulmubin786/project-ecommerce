@@ -5,9 +5,9 @@ use Illuminate\Http\Request;
 
 class DemoController extends Controller {
 
-    function DemoAction(Request $request): array {
+    function DemoAction(Request $request): string {
 
-        return $request->header();
+        return "Hello";
 
     }
 
