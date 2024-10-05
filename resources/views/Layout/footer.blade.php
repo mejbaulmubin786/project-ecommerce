@@ -1,7 +1,7 @@
 <footer class="py-5">
     <div class="container text-center pb-5 border-bottom">
       <a class="d-inline-block mx-auto mb-4" href="#">
-        <img class="img-fluid" src="bootstrap5-plain-assets/logos/plainb-logo.svg" alt="" width="96px">
+        <img class="img-fluid" src="{{ asset('bootstrap5-plain-assets/logos/plainb-logo.svg') }}" alt="" width="96px">
       </a>
       <ul class="d-flex flex-wrap justify-content-center align-items-center list-unstyled mb-4">
         <li><a class="link-secondary me-4" href="#">About</a></li>
@@ -11,19 +11,19 @@
       </ul>
       <div>
         <a class="d-inline-block me-4" href="#">
-          <img src="bootstrap5-plain-assets/socials/facebook.svg">
+          <img src="{{ asset('bootstrap5-plain-assets/socials/facebook.svg') }}">
         </a>
         <a class="d-inline-block me-4" href="#">
-          <img src="bootstrap5-plain-assets/socials/twitter.svg">
+          <img src="{{ asset('bootstrap5-plain-assets/socials/twitter.svg') }}">
         </a>
         <a class="d-inline-block me-4" href="#">
-          <img src="bootstrap5-plain-assets/socials/github.svg">
+          <img src="{{ asset('bootstrap5-plain-assets/socials/github.svg') }}">
         </a>
         <a class="d-inline-block me-4" href="#">
-          <img src="bootstrap5-plain-assets/socials/instagram.svg">
+          <img src="{{ asset('bootstrap5-plain-assets/socials/instagram.svg') }}">
         </a>
         <a class="d-inline-block" href="#">
-          <img src="bootstrap5-plain-assets/socials/linkedin.svg">
+          <img src="{{ asset('bootstrap5-plain-assets/socials/linkedin.svg') }}">
         </a>
       </div>
     </div>
