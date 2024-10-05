@@ -9,6 +9,7 @@
 </head>
 <body>
     @include('Layout.header')
+    @yield('content')
 
     @include('Layout.footer')
     <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>

@@ -1,7 +1,6 @@
-@include('component.header')
+@extends('Layout.app')
+@section('content')
 
-@include('component.hero')
+@endsection
 
-@include('component.team')
 
-@include('component.footer')
