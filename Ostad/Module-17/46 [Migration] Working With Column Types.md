@@ -10,7 +10,7 @@
 | `double()`        | The `double` method creates a DOUBLE equivalent column with the given precision (total digits) and scale (decimal digits). | `$table->double('amount', 8, 2);`                 |
 | `enum()`          | The `enum` method creates an ENUM equivalent column with the given valid values.                                           | `$table->enum('difficulty', ['easy', 'hard']);`   |
 
-প্রথমে টেবিলটি তৈরি করা এবং আপনার দেওয়া মাইগ্রেশন ফাইলটি নিয়ে বিশ্লেষণ শুরু করা যাক। আমরা Laravel মাইগ্রেশন ব্যবহার করে টেবিলটি তৈরি করব এবং বিভিন্ন ডেটা টাইপের কলামগুলো কীভাবে কাজ করে তা ব্যাখ্যা করব।
+আমরা Laravel মাইগ্রেশন ব্যবহার করে একটি টেবিল তৈরি করব এবং বিভিন্ন ডেটা টাইপের কলামগুলো কীভাবে কাজ করে তা ব্যাখ্যা করব।
 
 ```php
 <?php
