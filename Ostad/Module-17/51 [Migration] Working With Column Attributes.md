@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('lastName', 50);
             $table->string('country', 50)->default('Bangladesh');
             $table->string('pinCode', 50)->default('abd123')->invisible(); // invisible হলে ডিফল্ট ভেলু দিতে হয়।
-            $table->timestamps('create_date', 50)->useCurrent();
-            $table->timestamps('update_date', 50)->useCurrent()->useCurrentOnUpdate();
+            $table->timestamps('create_date')->useCurrent();
+            $table->timestamps('update_date')->useCurrent()->useCurrentOnUpdate();
         });
     }
 
@@ -54,7 +54,6 @@ $table->timestamps('update_date', 50)->useCurrent()->useCurrentOnUpdate();
 $table->string('pinCode', 50)->devault('abd123')->invisible();
 ```
 
--   এখানে `devault()` লেখা হয়েছে, যা ভুল। সঠিকভাবে এটি হবে `default()`।
 -   `invisible()` ফাংশন Laravel এ ডিফল্টভাবে কাজ করে না, এটি MySQL এর নতুন ফিচার। Laravel এর ডিফল্ট সেটআপে এটি ঠিকমতো সাপোর্ট নাও করতে পারে। যদি সাপোর্ট করে, তবে তা সাধারণত `default()` এর আগে রাখা হয়।
 
 ### কোডের সঠিক সংস্করণ

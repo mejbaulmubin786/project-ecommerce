@@ -17,7 +17,7 @@ return new class extends Migration
     public function up(): void
     {
 
-        Schema::table('profiles', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->boolean('is_bangladeshi');
             $table->bigInteger('vote');
@@ -35,10 +35,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-
-        Schema::table('profiles', function (Blueprint $table) {
-            $table->dropColumn('age');
-        });
+        Schema::dropIfExists('profiles');
     }
 };
 ```
+
+এখন আমি যদি চাই আমার এই টেবিলে নতুন কলাম যুক্ত করবো । টেবিল যখন আমরা ক্রিয়েট করি তখন আমরা Schema এর create মেথড কে কল করি কিন্তু আমরা যখন কোন টেবেলকে মডিফাই করবো যেমন টেবিল কে রিনেইম করবো বা টেবিলে কলাম যুক্ত করবো বা কোন কলাম ড্রফ করবো । টেবিল কে কমান্ড php artisan make:migration add_column_to_profiles

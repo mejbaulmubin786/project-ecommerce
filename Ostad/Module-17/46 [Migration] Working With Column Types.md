@@ -26,7 +26,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // টেবিলের কলামগুলি সংজ্ঞায়িত করা
+        // টেবিল তৈরি করা হচ্ছে
         Schema::create('profiles', function (Blueprint $table) {
             $table->bigIncrements('id'); // একটি অটো ইনক্রিমেন্টিং প্রাইমারি কী
             $table->boolean('is_bangladeshi'); // বুলিয়ান ডেটা, হ্যাঁ/না বা সত্য/মিথ্যা মানের জন্য
@@ -45,12 +45,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // টেবিল থেকে 'age' কলামটি ড্রপ করা
-        Schema::table('profiles', function (Blueprint $table) {
-            $table->dropColumn('age');
-        });
+        // টেবিলটি ড্রপ করা হচ্ছে
+        Schema::dropIfExists('profiles');
     }
 };
+
 ```
 
 ### ব্যাখ্যা:
