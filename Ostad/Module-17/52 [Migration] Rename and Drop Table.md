@@ -41,3 +41,4 @@ return new class extends Migration
 ```
 
 এখন টেবিল রিনেইম এর জন্য আমাকে public function up() ফাংশনে ব্যবহার করবো ‍Schema এর থেকে rename() মেথড। এর ভেতর বর্তমান টেবিলের নাম ও আমরা যেই নামে টেবিল টিকে চাই তা দিতে হবে। যেমন আমাদের Schema::rename('profiles', 'new_profiles');
+এখন টেবিল টিকে ডিলেট করেতে চাইলে php artisan make:migration drop_profiles
