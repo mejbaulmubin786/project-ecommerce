@@ -27,7 +27,7 @@ return new class extends Migration
     public function up(): void
     {
         // টেবিলের কলামগুলি সংজ্ঞায়িত করা
-        Schema::table('profiles', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
             $table->bigIncrements('id'); // একটি অটো ইনক্রিমেন্টিং প্রাইমারি কী
             $table->boolean('is_bangladeshi'); // বুলিয়ান ডেটা, হ্যাঁ/না বা সত্য/মিথ্যা মানের জন্য
             $table->bigInteger('vote'); // বড় ইন্টিজার ডেটা, যা বড় সংখ্যার জন্য ব্যবহৃত হয়
