@@ -103,7 +103,7 @@ $table->unsignedBigInteger('brand_id');
 
 ### 6. **Foreign Key সম্পর্ক তৈরি করা**
 
-ফরেন কি তৈরির সময় লক্ষ্য রাখতে হবে যে দুই কলামের মাঝে রিলেশন তৈরি করতে হবে তাদের ডাটা টাইপ যেন একই হয়।
+ফরেন কি তৈরির সময় লক্ষ্য রাখতে হবে যে দুই কলামের মাঝে রিলেশন তৈরি করতে হবে তাদের ডাটা টাইপ যেন একই হয়। উপরে আমরা Unsigned BigInteger ডাটা টাইপ ব্যবহার হয় এমন দুটি কলাম `{$table->unsignedBigInteger('category_id'); এবং $table->unsignedBigInteger('brand_id');}` তৈরি করেছি ফরেন কি হিসেবে ব্যবহার করার জন্য ।
 
 ```php
 $table->foreign('category_id')->references('id')->on('categories')
