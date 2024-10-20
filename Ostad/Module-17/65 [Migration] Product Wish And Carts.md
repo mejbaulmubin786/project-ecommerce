@@ -15,3 +15,24 @@ $table->foreign('email')->references('email')->on('profiles')
 $table->timestamp('created_at')->useCurrent();
 $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
 ```
+
+```php
+//cart
+$table->id();
+$table->string('email', 50);
+$table->unsignedBigInteger('product_id');
+$table->string('color', 200);
+$table->string('size', 200);
+
+$table->foreign('product_id')->references('id')->on('products')
+               ->restrictOnDelete()
+               ->restrictOnUpdate();
+
+$table->foreign('email')->references('email')->on('profiles')  
+
+               ->restrictOnDelete()
+               ->restrictOnUpdate();
+
+$table->timestamp('created_at')->useCurrent();
+$table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+```
