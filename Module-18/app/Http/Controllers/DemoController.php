@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class DemoController extends Controller {
     public function DemoAction() { // Use 'public' visibility and follow proper naming conventions
-        $products = DB::table('products')->pluck('discount_price', 'price'); // Store the query result in a variable
-        return response()->json($products); // Return as JSON for better API response handling
+        $result = DB::table('products')->min('price'); // Store the query result in a variable
+        return $result; // Return as JSON for better API response handling
     }
 }
