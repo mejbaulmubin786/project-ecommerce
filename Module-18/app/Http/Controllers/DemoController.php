@@ -8,9 +8,11 @@ use Illuminate\Support\Facades\DB;
 // It's good to include the base Controller
 
 class DemoController extends Controller {
-    public function DemoAction() { // Use 'public' visibility and follow proper naming conventions
-        $products = DB::table('products')->select('title', 'price')->get();
-
+    function DemoAction() {
+        $products = DB::table('products')
+            ->join('categories', 'products.category_id', '=', 'categories.id')
+            ->join('brands', 'products.brand_id', '=', 'brands.id')
+            ->get();
 
         return $products;
     }
