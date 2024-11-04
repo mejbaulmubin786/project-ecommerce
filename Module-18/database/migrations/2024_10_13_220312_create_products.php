@@ -13,9 +13,9 @@ return new class extends Migration {
             $table->id();
             $table->string('title', 200);
             $table->string('short_des', 500);
-            $table->string('price', 50);
+            $table->float('price');
             $table->boolean('discount');
-            $table->string('discount_price', 50);
+            $table->float('discount_price');
             $table->string('image', 200);
             $table->boolean('stock');
             $table->float('star');
