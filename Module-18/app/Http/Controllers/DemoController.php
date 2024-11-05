@@ -10,11 +10,9 @@ use Illuminate\Support\Facades\DB;
 
 class DemoController extends Controller {
     function DemoAction(Request $request) {
-        $products = DB::table('products')
-            ->join('categories', 'products.category_id', '=', 'categories.id')
-            ->join('brands', 'products.brand_id', '=', 'brands.id')
-            ->get();
+        $result = DB::table('brands')
+            ->insert(); // আমরা যদি জেসন বডি দিয়ে ডাটা পোস্ট করি তবে আমরা অবশ্যই insert মেথড ব্যবহার করবো।
 
-        return $products;
+        return $result;
     }
 }
