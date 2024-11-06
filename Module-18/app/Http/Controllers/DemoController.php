@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class DemoController extends Controller {
     function DemoAction(Request $request) {
-        $result = DB::table('brands')
-            ->insert(); // আমরা যদি জেসন বডি দিয়ে ডাটা পোস্ট করি তবে আমরা অবশ্যই insert মেথড ব্যবহার করবো।
+        $result = DB::table('brands')->insert($request->input()); // আমরা যদি জেসন বডি দিয়ে ডাটা পোস্ট করি তবে আমরা অবশ্যই insert মেথড ব্যবহার করবো।
 
         return $result;
     }
