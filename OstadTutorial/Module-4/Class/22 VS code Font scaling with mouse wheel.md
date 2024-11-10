@@ -1,0 +1,2 @@
+VS code এ চাইলে ctrl চেপে মাউস হুইল ঘুরিয়ে সহজে ফন্ট বড় ছোট করা যায়।  এর জন্য setting -> serch (mouse wheel)-> Mouse Wheel Zoom ক্লিক করে দি।
+![[WebDevelopment/Ostad/PHP/Ostad/Module-4/Mouse.png]]এভাবে হুইল ঘুরিয়ে করলে বোঝার উপায় নেই যে আমরা কত ফন্ট বাড়িয়েছি । আমরা চাইলে আমরা সরা সরি ctrl+shift +p চাপলে কমান্ড প্রম্পট ওপেন হবে সেখানে লিখতে হবে Foont 

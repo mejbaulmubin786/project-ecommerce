@@ -1,0 +1,2 @@
+VS code এর আর একটি গুরুত্বপূর্ন ফিচার হচ্ছে Minimap অর্থাৎ আমরা চাইলে পুরো পেইজের কোর্ডকে ডান সাইডে প্রদর্শন করাতে পারি। এর জন্য setting -> এ গিয়ে  Minimap 
+![[WebDevelopment/Ostad/PHP/Ostad/Module-4/Minimap.png]]
