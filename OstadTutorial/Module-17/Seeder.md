@@ -27,8 +27,8 @@ Seeder ফাইলগুলোতে আপনি ডেমো ডাটা ই
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use DB;
-use Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class UsersTableSeeder extends Seeder
 {
@@ -36,7 +36,7 @@ class UsersTableSeeder extends Seeder
     {
         for ($i = 1; $i <= 20; $i++) {
             DB::table('users')->insert([
-                'email' => 'user'.$i.'@example.com',
+                'email' => 'user' . $i . '@example.com',
                 'otp' => rand(100000, 999999),
                 'created_at' => now(),
                 'updated_at' => now(),

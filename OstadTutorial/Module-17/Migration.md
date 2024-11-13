@@ -160,26 +160,41 @@ return new class extends Migration
 ### `create_product_details_table` মাইগ্রেশন ফাইল
 
 ```php
-return new class extends Migration
-{
-    public function up()
-    {
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    /**
+     * Run the migrations.
+     */
+    public function up(): void {
         Schema::create('product_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->text('description');
-            $table->string('specification', 500);
+            $table->string('img1', 200);
+            $table->string('img2', 200);
+            $table->string('img3', 200);
+            $table->string('img4', 200);
+            $table->longText('des');
+            $table->string('color', 200);
+            $table->string('size', 200);
 
+            $table->unsignedBigInteger('product_id')->unique();
             $table->foreign('product_id')->references('id')->on('products')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
+                ->restrictOnDelete()
+                ->restrictOnUpdate();
+
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 
-    public function down()
-    {
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void {
         Schema::dropIfExists('product_details');
     }
 };
@@ -191,28 +206,40 @@ return new class extends Migration
 ### `create_product_sliders_table` মাইগ্রেশন ফাইল
 
 ```php
-return new class extends Migration
-{
-    public function up()
-    {
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    /**
+     * Run the migrations.
+     */
+    public function up(): void {
         Schema::create('product_sliders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
+            $table->string('title', 200);
+            $table->string('short_des', 500);
             $table->string('image', 200);
-
+            $table->unsignedBigInteger('product_id')->unique();
             $table->foreign('product_id')->references('id')->on('products')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
+
+                ->restrictOnDelete()
+                ->restrictOnUpdate();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 
-    public function down()
-    {
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void {
         Schema::dropIfExists('product_sliders');
     }
 };
+
 ```
 
 ### `create_product_reviews_table` মাইগ্রেশন ফাইল
@@ -256,15 +283,17 @@ return new class extends Migration
     {
         Schema::create('product_wishes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
             $table->string('email', 50);
+            $table->unsignedBigInteger('product_id');
 
             $table->foreign('product_id')->references('id')->on('products')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->foreign('email')->references('email')->on('users')
                 ->restrictOnDelete()
-                ->cascadeOnUpdate();
+                ->restrictOnUpdate();
+
+            $table->foreign('email')->references('email')->on('profiles')
+                ->restrictOnDelete()
+                ->restrictOnUpdate();
+
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
