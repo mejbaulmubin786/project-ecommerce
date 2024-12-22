@@ -1,1 +1,0 @@
-আমরা যদি দ্রুত কোন লাইনকে Duplicate করতে চাই তবে আমরা যাবো File->preferences->Keyboard Shortcuts এ গিয়ে লিখবো Duplicate Selection তারপর সেখানে ডাবল ক্লিক করে প্রয়োজনিয় কি সেট করলেই হবে । যেমন আমরা সেট করলাম ctrl+shift+alt+2
