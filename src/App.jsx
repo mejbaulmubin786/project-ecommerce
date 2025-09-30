@@ -1,50 +1,48 @@
-import React from 'react'
+import React from "react";
 import {
-  createRoutesFromElements,
   createBrowserRouter,
-  Route,
+  createRoutesFromElements,
   RouterProvider,
+  Route,
 } from "react-router-dom";
-//import Header from './components/Header';
-//import Footer from './components/Footer';
-import Home from './pages/Home';
-import Products from './pages/Products';
-import ProductDetails from './pages/ProductDetails';
-import About from './pages/About';
-import Contacts from './pages/Contacts';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import MyAccount from './pages/MyAccount';
-import Cart from './pages/Cart';
-import Checkout from './pages/Checkout';
-import NotFound from './pages/NotFound';
 
+// Layout
+import MainLayout from "./layouts/MainLayout";
+
+// Pages
+import Home from "./pages/Home";
+import Shop from "./pages/Shop";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Journal from "./pages/Journal";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Account from "./pages/Account";
+import NotFound from "./pages/NotFound";
+
+// Router setup
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <>
-      <Route path="/" element={<Home />} > </Route>
-      <Route path="/products" element={<Products />} > </Route >
-      <Route path="/product" element={<ProductDetails />} ></Route >
-      <Route path="/about" element={<About />} ></Route >
-      <Route path="/contacts" element={<Contacts />} ></Route >
-      <Route path="/login" element={<Login />} ></Route >
-      <Route path="/signup" element={<Signup />} ></Route >
-      <Route path="/my-account" element={<MyAccount />} ></Route >
-      <Route path="/cart" element={<Cart />} ></Route >
-      <Route path="/checkout" element={<Checkout />} ></Route >
-      <Route path="*" element={<NotFound />} ></Route > 
-     
-    </>
+    <Route path="/" element={<MainLayout />}>
+      <Route index element={<Home />} />
+      <Route path="shop" element={<Shop />} />
+      <Route path="about" element={<About />} />
+      <Route path="contact" element={<Contact />} />
+      <Route path="journal" element={<Journal />} />
+      <Route path="cart" element={<Cart />} />
+      <Route path="checkout" element={<Checkout />} />
+      <Route path="account" element={<Account />} />
+      <Route path="login" element={<Login />} />
+      <Route path="signup" element={<Signup />} />
+      <Route path="*" element={<NotFound />} />
+    </Route>
   )
 );
 
-
 const App = () => {
-  return (
+  return <RouterProvider router={router} />;
+};
 
-    <RouterProvider router={router} />
-
-  )
-}
-
-export default App
+export default App;
