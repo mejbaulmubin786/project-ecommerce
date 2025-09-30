@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FiMenu, FiX, FiShoppingCart, FiUser } from "react-icons/fi";
+import Logo from '../assets/logo.png'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +19,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="text-2xl font-bold tracking-wide">
-          Orebi
+          <img src={Logo} alt="" />
         </Link>
 
         {/* Desktop Menu */}
@@ -28,8 +29,8 @@ const Navbar = () => {
               key={link.name}
               to={link.path}
               className={({ isActive }) =>
-                `hover:text-blue-600 ${
-                  isActive ? "text-blue-600" : "text-gray-700"
+                `hover:text-[#262626] ${
+                  isActive ? "text-[#262626]" : "text-[#767676]"
                 }`
               }
             >
@@ -70,8 +71,8 @@ const Navbar = () => {
                 to={link.path}
                 onClick={() => setIsOpen(false)}
                 className={({ isActive }) =>
-                  `hover:text-blue-600 ${
-                    isActive ? "text-blue-600" : "text-gray-700"
+                  `hover:text-[#262626] ${
+                    isActive ? "text-[#262626]" : "text-[#767676]v"
                   }`
                 }
               >
